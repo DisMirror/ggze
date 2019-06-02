@@ -1,7 +1,7 @@
-package loader.scanning;
+package ggze.loader.scanning;
 
-import loader.Storage;
-import pub.ggze;
+import ggze.loader.Storage;
+import ggze.pub.ggze;
 
 import java.io.File;
 import java.lang.reflect.Field;

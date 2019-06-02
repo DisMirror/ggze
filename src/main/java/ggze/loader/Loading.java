@@ -1,10 +1,7 @@
-package loader;
+package ggze.loader;
 
-import actuator.ActuatorCommand;
-import loader.Printing.PrintController;
-import loader.scanning.ScanBean;
-import loader.scanning.ScanConfig;
-import loader.scanning.ScanController;
+import ggze.loader.Printing.PrintController;
+import ggze.loader.scanning.ScanController;
 
 public class Loading {
     public Loading() throws Exception {
@@ -22,7 +19,7 @@ public class Loading {
             new PrintController();
         }
     }
-    /*public static void main(String[] args) throws Exception {
+   /* public static void main(String[] args) throws Exception {
         new Loading();
     }*/
 }

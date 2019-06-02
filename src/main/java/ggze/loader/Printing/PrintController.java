@@ -1,6 +1,6 @@
-package loader.Printing;
+package ggze.loader.Printing;
 
-import loader.Storage;
+import ggze.loader.Storage;
 
 public class PrintController {
     public PrintController() throws Exception {

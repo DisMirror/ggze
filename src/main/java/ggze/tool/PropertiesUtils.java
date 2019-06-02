@@ -1,4 +1,4 @@
-package tool;
+package ggze.tool;
 
 import java.io.*;
 import java.util.LinkedHashMap;

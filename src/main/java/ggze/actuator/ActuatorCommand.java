@@ -1,9 +1,8 @@
-package actuator;
+package ggze.actuator;
 
-import loader.Storage;
+import ggze.loader.Storage;
 import net.sf.json.JSONObject;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;

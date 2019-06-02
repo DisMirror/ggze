@@ -1,9 +1,9 @@
-package loader.Printing;
+package ggze.loader.Printing;
 
-import loader.Storage;
+import ggze.loader.Storage;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import tool.FileUtils;
+import ggze.tool.FileUtils;
 
 public class PrintInter implements PrintDao {
     public StringBuilder interText = new StringBuilder();
@@ -11,6 +11,7 @@ public class PrintInter implements PrintDao {
     @Override
     public void printful() throws Exception {
         for (int i = 0; i < Storage.getObj().getBeanNames().size(); i++) {
+            interText=new StringBuilder();
             this.printHead();
             this.prntSystem(Storage.getObj().getBeanNames().get(i));
             this.printing(Storage.getObj().getBeanNames().get(i));
@@ -19,7 +20,7 @@ public class PrintInter implements PrintDao {
 
     public void printHead() {
         String interPath = Storage.getObj().getConfig().get("page");
-        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + ".inter";
+        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + ".dao.inter";
         //package
         interText.append("/*************创建接口***************/\n");
         interText.append("package " + interPath + ";\n");
@@ -71,7 +72,7 @@ public class PrintInter implements PrintDao {
     public void printing(String beanName) throws Exception {
         System.out.println(interText.toString());
         String interPath = Storage.getObj().getConfig().get("page");
-        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + "/inter";
+        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + "/dao/inter";
         interPath = interPath.replace(".", "/");
         new FileUtils(Storage.getObj().getConfig().get("filePath") + "/" + interPath, beanName + "Dao.java").OutPut(interText.toString());
     }

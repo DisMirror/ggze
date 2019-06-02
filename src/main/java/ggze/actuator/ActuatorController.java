@@ -1,4 +1,4 @@
-package actuator;
+package ggze.actuator;
 public class ActuatorController implements Actuator{
     @Override
     public Object execute(Object object) throws Exception {

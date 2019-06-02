@@ -1,4 +1,4 @@
-package loader.scanning;
+package ggze.loader.scanning;
 
 public class ScanController {
     public ScanController(){

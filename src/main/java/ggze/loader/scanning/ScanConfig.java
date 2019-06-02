@@ -1,7 +1,7 @@
-package loader.scanning;
+package ggze.loader.scanning;
 
-import loader.Storage;
-import tool.PropertiesUtils;
+import ggze.loader.Storage;
+import ggze.tool.PropertiesUtils;
 
 public class ScanConfig implements Scan{
     public ScanConfig(){}

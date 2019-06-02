@@ -1,4 +1,4 @@
-package actuator;
+package ggze.actuator;
 
 public class ActuatorOrder implements Actuator{
     private ActuatorCommand beanMap;

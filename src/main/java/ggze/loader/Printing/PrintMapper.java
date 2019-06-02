@@ -1,15 +1,16 @@
-package loader.Printing;
+package ggze.loader.Printing;
 
-import loader.Storage;
+import ggze.loader.Storage;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import tool.FileUtils;
+import ggze.tool.FileUtils;
 
 public class PrintMapper implements PrintDao {
     public StringBuilder mapperText= new StringBuilder();
     @Override
     public void printful() throws Exception {
         for (int i = 0; i < Storage.getObj().getBeanNames().size(); i++) {
+            mapperText=new StringBuilder();
             this.printHead();
             this.prntSystem(Storage.getObj().getBeanNames().get(i));
             this.printing(Storage.getObj().getBeanNames().get(i));
@@ -26,7 +27,7 @@ public class PrintMapper implements PrintDao {
     @Override
     public void prntSystem(String beanName) throws Exception {
         String interPath = Storage.getObj().getConfig().get("page");
-        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + ".inter";
+        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + ".dao.inter";
         mapperText.append("<mapper namespace='"+interPath+"."+beanName+"Dao'>\n");
         mapperText.append("<insert id='add'>insert into "+beanName+" (${name0}) values ('${value0}')</insert>\n");
         mapperText.append("<delete id='delete'>delete from "+beanName+" where ${name1}='${value1}'</delete>\n");
@@ -63,7 +64,7 @@ public class PrintMapper implements PrintDao {
     public void printing(String beanName) throws Exception {
         System.out.println(mapperText);
         String interPath = Storage.getObj().getConfig().get("page");
-        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + "/mapper";
+        interPath = interPath.substring(0, interPath.lastIndexOf(".")) + "/dao/mapper";
         interPath = interPath.replace(".", "/");
         new FileUtils(Storage.getObj().getConfig().get("filePath") + "/" + interPath, beanName + "Mapper.xml").OutPut(mapperText.toString());
     }

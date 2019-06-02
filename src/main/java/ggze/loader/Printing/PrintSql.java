@@ -1,8 +1,8 @@
-package loader.Printing;
+package ggze.loader.Printing;
 
-import loader.Storage;
-import tool.FileUtils;
-import tool.TimeUtils;
+import ggze.loader.Storage;
+import ggze.tool.FileUtils;
+import ggze.tool.TimeUtils;
 
 import java.util.List;
 

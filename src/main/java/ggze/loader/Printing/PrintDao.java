@@ -1,9 +1,4 @@
-package loader.Printing;
-
-import loader.Storage;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import tool.FileUtils;
+package ggze.loader.Printing;
 
 public interface PrintDao extends Print{
     @Override

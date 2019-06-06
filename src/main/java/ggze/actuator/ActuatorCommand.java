@@ -79,15 +79,18 @@ public class ActuatorCommand {
      * */
     public boolean update(Object object) {
         try {
-            for (int i = 0; i < getBeanNames().length; i++) {
-                if (getBeanNames()[i].toLowerCase().equals("uuid") || getBeanValues()[i].length() == 0) {
+            for(int i=0;i<getBeanNames().length;i++){
+
+                if(getBeanNames()[i].toLowerCase().equals("uuid")||getBeanValues()[i].length()==0){
                     continue;
-                } else {
+                }else {
                     if (getBeanNames()[i].equals("getClass")) {
                         continue;
                     } else {
-                        System.out.println(getBeanNames()[i].replace("get", "").toLowerCase() + ":" + getBeanValues()[i]);
-                        object.getClass().getMethod("update", String.class, String.class, String.class, String.class).invoke(object, getBeanNames()[i].replace("get", "").toLowerCase(), getBeanValues()[i], "uuid", this.beanMap.get("getUuid"));
+                        System.out.println(getBeanNames()[i].replace("get", "").toLowerCase()+":"+getBeanValues()[i]);
+
+                        object.getClass().getMethod("update", String.class, String.class, String.class, String.class).invoke(object, getBeanNames()[i].replace("get", "").toLowerCase(), getBeanValues()[i], "uuid", this.beanMap.get("uuid"));
+
                     }
                 }
             }

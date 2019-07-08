@@ -1,0 +1,99 @@
+package $package;
+import $daoURI;
+import $entityURI;
+import ggze.tool.ReturnBody;
+import ggze.actuator.ActuatorController;
+import ggze.tool.TimeUtils;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ggze.tool.BeanToJson;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.List;
+
+@RestController
+@RequestMapping("$controller")
+public class $controller {
+    @Autowired
+    private HttpServletRequest request;
+    @Autowired
+    private $dao $daoName;
+    @Autowired
+    private ActuatorController actuatorController;
+    @RequestMapping("add")
+    public String add() throws UnsupportedEncodingException {
+        $entity entity= ($entity) BeanToJson.jsonTobean(request.getParameter("jon"),$entity.class);
+        ReturnBody returnBody=new ReturnBody();
+        entity.setUuid("");
+        try {
+            String time= TimeUtils.getTimeFormat();
+            entity.setCreateTime(time);
+            entity.setMethodTime(time);
+            actuatorController.execute(entity,"add",$daoName);
+            returnBody.setCode("0");
+            returnBody.setTitle("成功");
+        } catch (Exception e) {
+            returnBody.setCode("1");
+            returnBody.setTitle("系统错误");
+        }
+        return  BeanToJson.toJsonObjectString(returnBody);
+    }
+    @RequestMapping("deleted")
+    public String deleted() throws UnsupportedEncodingException {
+        $entity entity= ($entity) BeanToJson.jsonTobean(request.getParameter("jon"),$entity.class);
+        ReturnBody returnBody=new ReturnBody();
+        try {
+            $daoName.delete("uuid",entity.getUuid());
+            returnBody.setCode("0");
+            returnBody.setTitle("成功");
+        } catch (Exception e) {
+            returnBody.setCode("1");
+            returnBody.setTitle("系统错误");
+        }
+        return  BeanToJson.toJsonObjectString(returnBody);
+    }
+    @RequestMapping("update")
+    public String update() throws UnsupportedEncodingException {
+        $entity entity= ($entity) BeanToJson.jsonTobean(request.getParameter("jon"),$entity.class);
+        ReturnBody returnBody=new ReturnBody();
+        try {
+            String time=TimeUtils.getTimeFormat();
+            entity.setMethodTime(time);
+            actuatorController.execute(entity,"update",$daoName);
+            returnBody.setCode("0");
+            returnBody.setTitle("成功");
+        } catch (Exception e) {
+            returnBody.setCode("1");
+            returnBody.setTitle("系统错误");
+        }
+        return  BeanToJson.toJsonObjectString(returnBody);
+    }
+    @RequestMapping("get")
+    public String get() throws UnsupportedEncodingException {
+        JSONObject jsonObject=JSONObject.fromObject(request.getParameter("jon"));
+        ReturnBody returnBody=new ReturnBody();
+        try {
+            int begin=Integer.parseInt(jsonObject.getString("begin"));
+            int end=Integer.parseInt(jsonObject.getString("end"));
+            String zdname=jsonObject.getString("zdname");
+            String zdval=jsonObject.getString("zdval");
+            String time=TimeUtils.getTimeFormat();
+            List<$entity> entityLIST = $daoName.paging(zdname,zdval,begin,end);
+            returnBody.setData(BeanToJson.toJsonArrayString(entityLIST));
+            returnBody.setCode("0");
+            returnBody.setTitle("成功");
+        } catch (Exception e) {
+            returnBody.setCode("1");
+            returnBody.setTitle("系统错误");
+        }
+        return  BeanToJson.toJsonObjectString(returnBody);
+    }
+    @RequestMapping("num")
+    public String num() throws UnsupportedEncodingException {
+        return String.valueOf($daoName.getNum("1","1"));
+    }
+}

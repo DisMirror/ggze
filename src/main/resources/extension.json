@@ -1,0 +1,63 @@
+[
+  {
+    "inter": {
+      "name": "paging",
+      "type": "List<?>",
+      "parameter": [
+        {"parameterName": "tjname","parameterType": "String"},
+        {"parameterName": "tjva","parameterType": "String"},
+        {"parameterName": "begin","parameterType": "int"},
+        {"parameterName": "end","parameterType": "int"}
+      ]
+    },
+    "mapper": {
+      "mapperType": "select",
+      "resultType": "?",
+      "sql": "select  * from ? where ${tjname}='${tjva}' order by uuid limit ${begin},${end}"
+    }
+  },
+  {
+    "inter": {
+      "name": "isSelectSome",
+      "type": "List<?>",
+      "parameter": [
+        {"parameterName": "ming","parameterType": "String"},
+        {"parameterName": "zhi","parameterType": "String"}
+      ]
+    },
+    "mapper": {
+      "mapperType": "select",
+      "resultType": "?",
+      "sql": "select  * from ? where ${ming}='${zhi}'"
+    }
+  },
+  {
+    "inter": {
+      "name": "custom",
+      "type": "?",
+      "parameter": [
+        {"parameterName": "sql","parameterType": "String"}
+      ]
+    },
+    "mapper": {
+      "mapperType": "select",
+      "resultType": "?",
+      "sql": "${sql}"
+    }
+  },
+  {
+    "inter": {
+      "name": "getNum",
+      "type": "int",
+      "parameter": [
+        {"parameterName": "sqlName","parameterType": "String"},
+        {"parameterName": "sqlVal","parameterType": "String"}
+      ]
+    },
+    "mapper": {
+      "mapperType": "select",
+      "resultType": "java.lang.Integer",
+      "sql": "select count(*) from ? where ${sqlName}='${sqlVal}'"
+    }
+  }
+]

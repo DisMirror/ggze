@@ -12,5 +12,7 @@ public class PrintController {
         new PrintInter().printful();
         //输出Mapper文件
         new PrintMapper().printful();
+        //输出controller.java
+        new PrintContro().printful();
     }
 }

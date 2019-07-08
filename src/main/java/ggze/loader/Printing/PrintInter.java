@@ -14,7 +14,11 @@ public class PrintInter implements PrintDao {
             interText=new StringBuilder();
             this.printHead();
             this.prntSystem(Storage.getObj().getBeanNames().get(i));
-            this.printing(Storage.getObj().getBeanNames().get(i));
+            if(Storage.getObj().config.get("no").indexOf(Storage.getObj().getBeanNames().get(i))>=0){
+                continue;
+            }else{
+                this.printing(Storage.getObj().getBeanNames().get(i));
+            }
         }
     }
 

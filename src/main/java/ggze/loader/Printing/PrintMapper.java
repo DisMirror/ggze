@@ -13,7 +13,11 @@ public class PrintMapper implements PrintDao {
             mapperText=new StringBuilder();
             this.printHead();
             this.prntSystem(Storage.getObj().getBeanNames().get(i));
-            this.printing(Storage.getObj().getBeanNames().get(i));
+            if(Storage.getObj().config.get("no").indexOf(Storage.getObj().getBeanNames().get(i))>=0){
+                continue;
+            }else{
+                this.printing(Storage.getObj().getBeanNames().get(i));
+            }
         }
     }
 
@@ -50,7 +54,11 @@ public class PrintMapper implements PrintDao {
             StringBuilder pub = new StringBuilder();
             pub.append(" <" + exOBJ.get("mapperType").toString());
             pub.append("  id='"+exInterOBJ.get("name")+"' ");
-            pub.append("  resultType='"+Storage.getObj().getConfig().get("page")+"."+exOBJ.get("resultType").toString().replace("?",beanName)+"'>\n");
+            if(exOBJ.get("resultType").toString().indexOf("?")>=0){
+                pub.append("  resultType='"+Storage.getObj().getConfig().get("page")+"."+exOBJ.get("resultType").toString().replace("?",beanName)+"'>\n");
+            }else{
+                pub.append("  resultType='"+exOBJ.get("resultType").toString()+"'>\n");
+            }
             pub.append("  "+exOBJ.get("sql").toString().replace("?",beanName)+"\n");
             pub.append(" </" + exOBJ.get("mapperType").toString()+">\n");
             mapperText.append(pub);

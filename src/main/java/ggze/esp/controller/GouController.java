@@ -9,7 +9,10 @@ import ggze.esp.entity.DataRecord;
 import ggze.esp.entity.LookRecord;
 import ggze.loader.Storage;
 
+import ggze.tool.BeanToJson;
 import ggze.tool.ParHttpRequest;
+import ggze.tool.ReturnBody;
+import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -55,10 +58,14 @@ public class GouController{
         String code=request.getParameter("code");
         String view=Storage.getObj().getConfig().get("mirrorView");
         LookRecord lookRecord = lookRecordDao.isSelect("uuid",code);
-        if(view.equals("2")){
-            return  lookRecord.getPageView();
+        if(lookRecord.getStatus().equals("0")){
+            if(view.equals("2")){
+                return  lookRecord.getPageView();
+            }else{
+                response.sendRedirect(lookRecord.getPageView());
+            }
         }else{
-            response.sendRedirect(lookRecord.getPageView());
+            return null;
         }
         return null;
     }
@@ -81,10 +88,17 @@ public class GouController{
         String webName= Storage.getObj().getConfig().get("mirrorName");
         String code=request.getParameter("code");
         DataRecord dataRecord = dataRecordDao.isSelect("uuid",code);
-        String jon=request.getParameter("jon");
-        String xp="http://localhost"+webName+"/"+dataRecord.getUri();
-        String req=ParHttpRequest.sendPost("http://localhost"+webName+"/"+dataRecord.getUri(),jon);
-        return req;
+        if(!dataRecord.getStatus().equals("0")){
+            String jon=request.getParameter("jon");
+            String xp="http://localhost"+webName+"/"+dataRecord.getUri();
+            String req=ParHttpRequest.sendPost("http://localhost"+webName+"/"+dataRecord.getUri(),jon);
+            return req;
+        }else{
+            ReturnBody returnBody = new ReturnBody();
+            returnBody.setCode("1");
+            returnBody.setTitle("此api已经被禁用！请联系开发者");
+            return BeanToJson.toJsonObjectString(returnBody);
+        }
     }
 
 

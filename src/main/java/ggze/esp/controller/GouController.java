@@ -88,7 +88,7 @@ public class GouController{
         String webName= Storage.getObj().getConfig().get("mirrorName");
         String code=request.getParameter("code");
         DataRecord dataRecord = dataRecordDao.isSelect("uuid",code);
-        if(!dataRecord.getStatus().equals("0")){
+        if(dataRecord.getStatus().equals("0")){
             String jon=request.getParameter("jon");
             String xp="http://localhost"+webName+"/"+dataRecord.getUri();
             String req=ParHttpRequest.sendPost("http://localhost"+webName+"/"+dataRecord.getUri(),jon);

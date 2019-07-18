@@ -91,7 +91,7 @@ public class GouController{
         if(dataRecord.getStatus().equals("0")){
             String jon=request.getParameter("jon");
             String xp="http://localhost"+webName+"/"+dataRecord.getUri();
-            String req=ParHttpRequest.sendPost("http://localhost"+webName+"/"+dataRecord.getUri(),jon);
+            String req=ParHttpRequest.sendPost("http://localhost"+webName+"/"+dataRecord.getUri(),"jon="+jon);
             return req;
         }else{
             ReturnBody returnBody = new ReturnBody();

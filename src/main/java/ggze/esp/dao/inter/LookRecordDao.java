@@ -1,4 +1,3 @@
-/*************创建接口***************/
 package ggze.esp.dao.inter;
 import org.apache.ibatis.annotations.*;
 

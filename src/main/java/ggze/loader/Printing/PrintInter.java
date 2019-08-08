@@ -30,11 +30,13 @@ public class PrintInter implements PrintDao {
         interText.append("package " + interPath + ";\n");
         interText.append("import org.apache.ibatis.annotations.Param;\n");
         interText.append("import java.util.List;\n");
+        interText.append("import org.apache.ibatis.annotations.Mapper;\n");
 
     }
 
     public void prntSystem(String beanName) throws Exception {
         interText.append("import " + Storage.getObj().getConfig().get("page") + "." + beanName + ";\n");
+        interText.append("@Mapper\n");
         //接口名
         interText.append("public interface " + beanName + "Dao{\n");
         //五大基础方法

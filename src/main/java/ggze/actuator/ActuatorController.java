@@ -1,4 +1,8 @@
 package ggze.actuator;
+
+import org.springframework.stereotype.Service;
+
+@Service
 public class ActuatorController implements Actuator{
     @Override
     public Object execute(Object object) throws Exception {

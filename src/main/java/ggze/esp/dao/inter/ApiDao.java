@@ -3,7 +3,9 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import ggze.esp.entity.Api;
+import org.springframework.stereotype.Component;
 
+@Mapper
 public interface ApiDao{
     @Insert("insert into Api (${name0}) values ('${value0}')")
     int add(@Param("name0")String n,@Param("value0")String v);

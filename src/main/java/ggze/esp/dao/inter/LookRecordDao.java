@@ -3,7 +3,9 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import ggze.esp.entity.LookRecord;
+import org.springframework.stereotype.Component;
 
+@Mapper
 public interface LookRecordDao{
     @Insert("insert into LookRecord (${name0}) values ('${value0}')")
     int add(@Param("name0")String n,@Param("value0")String v);

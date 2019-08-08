@@ -47,7 +47,7 @@ public class GouController{
         }else{
             api=apiDao.isSelect("a_ip",originHeader);
         }
-        if(api==null||api.getA_is().equals("0")){
+        if(api!=null&&api.getA_is().equals("0")){
             response.setHeader("Access-Control-Allow-Origin", originHeader);
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
             response.setHeader("Access-Control-Max-Age", "3600");
@@ -79,7 +79,7 @@ public class GouController{
         }else{
             api=apiDao.isSelect("a_ip",originHeader);
         }
-        if(api==null||api.getA_is().equals("0")){
+        if(api!=null&&api.getA_is().equals("0")){
             response.setHeader("Access-Control-Allow-Origin", originHeader);
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
             response.setHeader("Access-Control-Max-Age", "3600");

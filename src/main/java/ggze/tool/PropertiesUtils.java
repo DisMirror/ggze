@@ -1,5 +1,7 @@
 package ggze.tool;
 
+import org.springframework.core.io.ClassPathResource;
+
 import java.io.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,7 +14,8 @@ public class PropertiesUtils {
         this.path=path;
         Properties pro=new Properties();
         try {
-            InputStream is = new BufferedInputStream(new FileInputStream(path));
+            ClassPathResource classPathResource = new ClassPathResource("config.properties");
+            InputStream is =classPathResource.getInputStream();
             BufferedReader in = new BufferedReader(new InputStreamReader(is,"UTF-8"));
             pro.load(in);
             this.pro=pro;
